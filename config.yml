@@ -1,0 +1,35 @@
+language: "en"
+
+pipeline:
+  - name: "SpacyNLP"
+  - name: "SpacyTokenizer"
+  - name: "SpacyFeaturizer"
+  - name: "RegexFeaturizer"
+  - name: "CRFEntityExtractor"
+  - name: "CountVectorsFeaturizer" # featurizes text based on words.
+  - name: "CountVectorsFeaturizer" # featurizes text based on character n-grams, preserving word boundaries.
+    analyzer: "char_wb"
+    min_ngram: 1
+    max_ngram: 5
+  # - name: "SklearnIntentClassifier"
+  - name: "EmbeddingIntentClassifier"
+
+# equivalent to the preconfigured pipeline template-> pipeline: "pretrained_embeddings_spacy"
+# pretrained_embeddings_spacy and supervised_embeddings were previously known as spacy_sklearn and tensorflow_embeddings
+
+policies:
+  - name: MappingPolicy
+  
+  - name: MemoizationPolicy
+    max_history: 3
+  
+  - name: KerasPolicy
+    epochs: 200
+    max_history: 3
+    batch_size: 16
+    augmentation_factor: 70
+  
+  - name: FallbackPolicy
+    nlu_threshold: 0.2
+    core_threshold: 0.1
+    fallback_action_name: 'utter_default'

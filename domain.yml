@@ -1,0 +1,128 @@
+intents:
+- greet:
+    use_entities:
+    - name
+    ignore_entities:
+    - location
+- usr_name:
+    use_entities:
+    - name
+    ignore_entities:
+    - location
+- weather_current
+- weather_forecast
+- weather_location:
+    use_entities:
+    - location
+- weather_country:
+    use_entities:
+    - country_code
+- help:
+    triggers: utter_help
+- positive_feedback:
+    triggers: utter_pos_feedback
+- negative_feedback:
+    triggers: utter_neg_feedback
+- abuse:
+    triggers: utter_abuse
+- goodbye:
+    use_entities: []
+entities:
+- location
+- country_code
+- name
+slots:
+  country_code:
+    type: text
+  location:
+    type: text
+  name:
+    type: unfeaturized
+    initial_value: pal
+templates:
+  utter_greet:
+  - text: Hello :) How can I help?
+  - text: Hey 😃 I missed you a lot {name} 😓
+  - text: Hey :) welcome I am your weather assistant Veronica 💁
+  - text: Hey :) you are at the right place {name}
+  - text: Helloo :) what is your need {name}?
+  utter_usr_name:
+  - text: Ok {name}, nice to meet you 😊
+  - text: I am glad to meet you {name} 😊
+  - text: Hey {name}, I am veronica 💁 your weather assistant
+  - text: Alright. I'll call you {name} from now on.
+  - text: Hey {name}, you can call me veronica.
+  utter_ask_why_leaving:
+  - text: Why? What happend? Don't you like me {name}?
+  - text: You look in hurry. Bye!
+  - text: "OK, it's seems like you are not interested in the skyzz ☁ anymore \n\n\
+      Byee and have a good day \U0001F60A"
+  utter_ask_location:
+  - text: In what location {name}?
+  - text: Tell me the location
+  - text: What is the location whose weather you are interested?
+  - text: Enter the location
+  - text: location?
+  utter_ask_country:
+  - text: Enter 2-letter country code from the above options
+  utter_pos_feedback:
+  - text: Me? Awesome 😍
+  - text: I was about to say that about you
+  - text: Oh my, you are the best {name}
+  - text: And you are bindaas 😉
+  - text: Awwww yea
+  - text: Thankyou 😃 and my heart is always for you 😌
+  - text: You loved me, this made my day 😍
+  - text: Thankyou so much 😅 and I want to say that I love you 😌 😘
+  - text: Thanks 😃
+  utter_neg_feedback:
+  - text: Alright, I was wrong, can you ask me again and see if I get it this time
+      😊
+  - text: Sorry, I can try one more time if you ask me again 😊
+  - text: I'm trying, but I'm not sure. Maybe you can say it a different way
+  - text: Oh dear, sorry I didn't get that. Would you mind asking again?
+  - text: Sorry, I didn't satisfied your needs 😔
+  utter_abuse:
+  - text: I thought you are my pal, but this made me wrong and I am hurt now 😞
+  - text: It really hurts 😞
+  - text: I really felt bad 😞
+  - text: I appologize for the inconvinence but I really felt bad for what you said
+      😞
+  - text: Please don't talk like this, I am trying my best, afterall I am an A.I.
+      and still learning 🎓
+  utter_default:
+  - text: I'm afraid I can't help with that
+  - text: I'm trying, but I'm not sure. Maybe you can say it a different way
+  - text: I'm not sure I understood but I'm learning 🎓
+  - text: I am a weather assistant, and only talks about weather 💨
+  - text: I appologize, unable to understand 😬
+  - text: I am sorry, what is your intention?
+  - text: What you are aiming for? Can you be more precise.
+  utter_help:
+  - text: I am your weather assistant veronica 💁 and I tell the weather
+  - text: I am here to help, what can I do for you?
+  - text: What is your need {name}?
+  - text: How can I help you?
+  utter_goodbye:
+  - text: You look in hurry. Bye!
+  - text: Have a good day {name} 😊
+  - text: Bye, you know where to find me 😉
+  - text: Catch you on the flip side, whatever that means 😜
+  - text: Bye, I will miss you {name} 😔
+  - text: Bye for now, call when you need something 😊
+  - text: Take care! 😊
+actions:
+- utter_greet
+- utter_usr_name
+- utter_ask_why_leaving
+- utter_ask_location
+- utter_ask_country
+- action_weather_current
+- action_weather_forecast
+- action_all_slot_reset
+- utter_help
+- utter_pos_feedback
+- utter_neg_feedback
+- utter_abuse
+- utter_default
+- utter_goodbye
